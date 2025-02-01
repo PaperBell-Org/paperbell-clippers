@@ -1,0 +1,69 @@
+{
+	"schemaVersion": "0.1.0",
+	"name": "Scholar clipper",
+	"behavior": "create",
+	"noteContentFormat": "## 基本信息\n````ad-flex\n\n<div>\n\n<br>\n\n🧑‍🔬`=(this.name)`\n📮`=(this.email)`\n🏫`=link(this.institute)`\n🔗`=(this.website)`\n\n</div>\n\n\n<div>\n\n\n`=(\"![](\" + this.photo + \")\")`\n\n\n</div>\n\n````\n## 研究兴趣\n- \n## 相关论文\n```dataviewjs\nlet names = dv.current().aliases ? dv.current().aliases : [];\nnames.push(dv.current().name)\n\n// 参考 https://forum.obsidian.md/t/for-loops-and-dataviewjs/46284\n// every: 每个要素都在；\n// some: 某个要素在\n\ndv.table([\"论文\",\"期刊\",\"年份\"],\ndv.pages(`#paper`)\n\t.where(t => names.some(x => t.authors.includes(x)))\n\t.map(b => [b.file.link, b.journal, b.paper_date])\n\t.sort(b => b.paper_date, 'desc')\n)\n```\n## 最新动态\n```dataviewjs\n\nlet folderChoicePath = \"00 - 每日日记/DailyNote\"\nconst files = app.vault.getMarkdownFiles().filter(file => file.path.includes(folderChoicePath))\nlet names = dv.current().aliases ? dv.current().aliases : [];\nnames.push(dv.current().name)\n\n\nlet arr = files.map(async(file) => { \n    const content = await app.vault.cachedRead(file) \n    let lines = await content.split(\"\\n\").filter(line => names.some(name => line.includes(name)))\n    //console.log(lines) \n    return [\"[[\"+file.name.split(\".\")[0]+\"]]\", lines] \n}) \n\nPromise.all(arr).then(values => { \n    const beautify = values.map(value => { \n        const temp = value[1].map(line => { return line }) //美化要重写\n        return [value[0],temp] \n    }) \n    const exists = beautify.filter(value => value[1][0] && value[0] != \"[[未命名 10]]\") .sort(value => value[0],'desc') \n    dv.table([\"日期\", \"动态\"], exists) \n})\n```",
+	"properties": [
+		{
+			"name": "aliases",
+			"value": "",
+			"type": "multitext"
+		},
+		{
+			"name": "gender",
+			"value": "{{\\\"gender of the current scholar, tell me 男 or 女 if Chinese; if English, tell me male or famele\\\"}}",
+			"type": "text"
+		},
+		{
+			"name": "birthday",
+			"value": "",
+			"type": "text"
+		},
+		{
+			"name": "email",
+			"value": "{{\\\"email of the current scholar\\\"}}",
+			"type": "text"
+		},
+		{
+			"name": "title",
+			"value": "{{\\\"title of the current scholar\\\"}}",
+			"type": "text"
+		},
+		{
+			"name": "tags",
+			"value": "scholar, clippings",
+			"type": "multitext"
+		},
+		{
+			"name": "institute",
+			"value": "{{\\\"institute of the current scholar\\\"}}",
+			"type": "text"
+		},
+		{
+			"name": "name",
+			"value": "{{author}}",
+			"type": "text"
+		},
+		{
+			"name": "following_date",
+			"value": "{{date}}",
+			"type": "text"
+		},
+		{
+			"name": "website",
+			"value": "{{url}}",
+			"type": "text"
+		},
+		{
+			"name": "photo",
+			"value": "{{\\\"Profile photo address of this person\\\"}}",
+			"type": "text"
+		}
+	],
+	"triggers": [
+		"/\\/(?:person|people|profile|faculty|staff)\\//",
+		"schema:@Recipe"
+	],
+	"noteNameFormat": "{{\"First name and Last name of the current scholar\"}}",
+	"path": "Persons/Scholars"
+}

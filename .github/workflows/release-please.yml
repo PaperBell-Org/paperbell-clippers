@@ -1,0 +1,46 @@
+name: release-please
+on:
+  push:
+    branches:
+      - main
+      
+permissions:
+  contents: write
+  pull-requests: write
+
+jobs:
+  release-please:
+    runs-on: ubuntu-latest
+    outputs:
+      release_created: ${{ steps.release.outputs.release_created }}
+      tag_name: ${{ steps.release.outputs.tag_name }}
+    steps:
+      - uses: google-github-actions/release-please-action@v3
+        id: release
+        with:
+          release-type: node
+          package-name: paperbell-clipper
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+  build-and-attach-assets:
+    needs: release-please
+    runs-on: ubuntu-latest
+    if: ${{ needs.release-please.outputs.release_created }}
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+      
+      - name: Create source code archive
+        run: |
+          git archive --format=zip --output=source-code.zip HEAD
+          
+      - name: Create templates archive
+        run: |
+          zip -r templates.zip templates/
+
+      - name: Upload Release Assets
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          gh release upload ${{ needs.release-please.outputs.tag_name }} source-code.zip templates.zip --clobber
