@@ -6,7 +6,7 @@
 
 ## 模板
 
-- [爬取并导入学者信息到 PaperBell](/templates/scholar/README.md)
+- [爬取并导入学者信息到 PaperBell](scholar/README.md)
 
 ## 贡献指南
 
