@@ -6,7 +6,7 @@
 
 ## 开始使用
 
-下载 [scholar-clipper.json](./scholar-clipper.json) 文件，并将其添加到 Obsidian Web Clipper 插件的模板中。
+下载 [scholar-clipper-clipper.json](./scholar-clipper-clipper.json) 文件，并将其添加到 Obsidian Web Clipper 插件的模板中。
 
 ![导入模板](https://songshgeo-picgo-1302043007.cos.ap-beijing.myqcloud.com/uPic/CleanShot%202025-02-01%20at%2018.58.58@2x.png)
 
