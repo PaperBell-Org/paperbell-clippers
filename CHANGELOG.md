@@ -1,5 +1,17 @@
 # Changelog
 
+## [1.1.0](https://github.com/PaperBell-Org/paperbell-clippers/compare/v1.0.1...v1.1.0) (2025-02-22)
+
+
+### Features
+
+* :truck: Rename scholar clipper ([99e68d6](https://github.com/PaperBell-Org/paperbell-clippers/commit/99e68d6c7122979e333ae241a75b5b66cc5866e2))
+
+
+### Bug Fixes
+
+* :bug: include more triggers, fix name property ([eaeba5d](https://github.com/PaperBell-Org/paperbell-clippers/commit/eaeba5d4dd2bcc9146429269d8fe3bfc16e6e69a))
+
 ## [1.0.1](https://github.com/PaperBell-Org/paperbell-clippers/compare/v1.0.0...v1.0.1) (2025-02-01)
 
 
