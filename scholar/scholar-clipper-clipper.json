@@ -11,7 +11,7 @@
 		},
 		{
 			"name": "gender",
-			"value": "{{\\\"gender of the current scholar, tell me 男 or 女 if Chinese; if English, tell me male or famele\\\"}}",
+			"value": "{{\\\"Gender of the current scholar, tell me 男 or 女 if Chinese; if English, tell me male or famele\\\"}}",
 			"type": "text"
 		},
 		{
@@ -21,12 +21,12 @@
 		},
 		{
 			"name": "email",
-			"value": "{{\\\"email of the current scholar\\\"}}",
+			"value": "{{\\\"Email address of the current scholar, leave it N/A if doesn't exist\\\"}}",
 			"type": "text"
 		},
 		{
 			"name": "title",
-			"value": "{{\\\"title of the current scholar\\\"}}",
+			"value": "{{\\\"Professional title of the current scholar\\\"}}",
 			"type": "text"
 		},
 		{
@@ -62,8 +62,10 @@
 	],
 	"triggers": [
 		"/\\/(?:person|people|profile|faculty|staff|edu|research|scholar|research-profile)\\//",
-		"schema:@Recipe"
+		"schema:@Recipe",
+		"https://scholar.google.com"
 	],
 	"noteNameFormat": "{{\"First name and Last name of the current scholar\"}}",
-	"path": "Persons/Scholars"
+	"path": "Persons/Scholars",
+	"context": "If this page is on Google Scholar, please disregard the user's own Gmail address. Thank you. Please read the {{fullHtml}} and complete the required information."
 }
