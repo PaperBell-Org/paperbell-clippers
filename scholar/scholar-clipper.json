@@ -2,8 +2,13 @@
 	"schemaVersion": "0.1.0",
 	"name": "Scholar clipper",
 	"behavior": "create",
-	"noteContentFormat": "## 基本信息\n\n````ad-flex\n\n<div>\n\n<br>\n\n🧑‍🔬`=(this.name)`\n📮`=(this.email)`\n🏫`=link(this.institute)`\n🔗`=(this.website)`\n\n</div>\n\n\n<div>\n\n\n`=(\"![](\" + this.photo + \")\")`\n\n\n</div>\n\n````\n\n## 研究兴趣\n\n-\n\n## 论文列表\n\n![[论文检索.base]]\n\n## 最新动态\n\n```dataviewjs\n\nlet folderChoicePath = \"00 - 每日日记/DailyNote\"\nconst files = app.vault.getMarkdownFiles().filter(file => file.path.includes(folderChoicePath))\nlet names = dv.current().aliases ? dv.current().aliases : [];\nnames.push(dv.current().name)\n\n\nlet arr = files.map(async(file) => {\n    const content = await app.vault.cachedRead(file)\n    let lines = await content.split(\"\\n\").filter(line => names.some(name => line.includes(name)))\n    //console.log(lines)\n    return [\"[[\"+file.name.split(\".\")[0]+\"]]\", lines]\n})\n\nPromise.all(arr).then(values => {\n    const beautify = values.map(value => {\n        const temp = value[1].map(line => { return line }) //美化要重写\n        return [value[0],temp]\n    })\n    const exists = beautify.filter(value => value[1][0] && value[0] != \"[[未命名 10]]\") .sort(value => value[0],'desc')\n    dv.table([\"日期\", \"动态\"], exists)\n})\n```\n",
+	"noteContentFormat": "## 基本信息\n\n````ad-flex\n\n<div>\n\n<br>\n\n🧑‍🔬`=(this.name)`\n📮`=(this.email)`\n🏫`=link(this.institute)`\n🔗`=(this.website)`\n\n</div>\n\n\n<div>\n\n\n`=(\"![](\" + this.photo + \")\")`\n\n\n</div>\n\n````\n\n## 研究兴趣\n\n> 研究兴趣见 frontmatter 的 `keywords`（可被 Base 筛选；概念端会按 keyword 反查到本学者）。下方可补充自由描述。\n\n`=this.keywords`\n\n-\n\n## 相关论文\n\n![[论文检索.base]]\n\n## 动态日志\n\n> 记录学者的**外部**更新（新论文、职位变动等）。职位变动时把新机构追加到 frontmatter `institute` 数组开头。\n> 由 [[学者刷新工作流]] 定期补充，或手动添加。\n\n> [!update] {{date}}\n> - 建档\n\n## 最新动态\n\n```dataviewjs\n\nlet folderChoicePath = \"00 - 每日日记/DailyNote\"\nconst files = app.vault.getMarkdownFiles().filter(file => file.path.includes(folderChoicePath))\nlet names = dv.current().aliases ? dv.current().aliases : [];\nnames.push(dv.current().name)\n\n\nlet arr = files.map(async(file) => {\n    const content = await app.vault.cachedRead(file)\n    let lines = await content.split(\"\\\\n\").filter(line => names.some(name => line.includes(name)))\n    return [\"[[\"+file.name.split(\".\")[0]+\"]]\", lines]\n})\n\nPromise.all(arr).then(values => {\n    const beautify = values.map(value => {\n        const temp = value[1].map(line => { return line })\n        return [value[0],temp]\n    })\n    const exists = beautify.filter(value => value[1][0] && value[0] != \"[[未命名 10]]\") .sort(value => value[0],'desc')\n    dv.table([\"日期\", \"动态\"], exists)\n})\n\n```\n",
 	"properties": [
+		{
+			"name": "name",
+			"value": "{{\\\"学者姓名，需与文件标题格式保持一致（当前学者的名与姓）\\\"}}",
+			"type": "text"
+		},
 		{
 			"name": "aliases",
 			"value": "",
@@ -22,32 +27,12 @@
 		{
 			"name": "email",
 			"value": "{{\\\"当前学者的电子邮箱地址；若页面中不存在则填 N/A\\\"}}",
-			"type": "text"
+			"type": "multitext"
 		},
 		{
 			"name": "title",
 			"value": "{{\\\"当前学者的专业职称（如 教授 / 副教授 / 研究员 等）\\\"}}",
-			"type": "text"
-		},
-		{
-			"name": "tags",
-			"value": "scholar, clippings",
 			"type": "multitext"
-		},
-		{
-			"name": "institute",
-			"value": "{{\\\"当前学者所属的机构：给出大学或研究所的名称，而非院系。请使用学术数据库中登记的官方名称，而非翻译名。\\\"}}",
-			"type": "text"
-		},
-		{
-			"name": "name",
-			"value": "{{\\\"学者姓名，需与文件标题格式保持一致（当前学者的名与姓）\\\"}}",
-			"type": "text"
-		},
-		{
-			"name": "following_date",
-			"value": "{{date}}",
-			"type": "text"
 		},
 		{
 			"name": "website",
@@ -58,6 +43,51 @@
 			"name": "photo",
 			"value": "{{\\\"该学者头像照片的图片地址\\\"}}",
 			"type": "text"
+		},
+		{
+			"name": "tags",
+			"value": "scholar, clippings",
+			"type": "multitext"
+		},
+		{
+			"name": "institute",
+			"value": "{{\\\"当前学者所属的机构：给出大学或研究所的名称，而非院系。请使用学术数据库中登记的官方名称，而非翻译名。若有多个机构，用英文逗号分隔。\\\"}}",
+			"type": "multitext"
+		},
+		{
+			"name": "following_date",
+			"value": "{{date}}",
+			"type": "text"
+		},
+		{
+			"name": "keywords",
+			"value": "{{\\\"该学者的研究兴趣关键词，返回 3-6 个宽泛标签，用英文逗号分隔（如 flood risk, socio-hydrology, water management）\\\"}}",
+			"type": "multitext"
+		},
+		{
+			"name": "country",
+			"value": "{{\\\"该学者所在机构所属的国家或地区（英文，如 China, United States, Sweden）\\\"}}",
+			"type": "text"
+		},
+		{
+			"name": "roles",
+			"value": "",
+			"type": "multitext"
+		},
+		{
+			"name": "updated",
+			"value": "{{date}}",
+			"type": "text"
+		},
+		{
+			"name": "last_checked",
+			"value": "{{date}}",
+			"type": "text"
+		},
+		{
+			"name": "link_status",
+			"value": "",
+			"type": "multitext"
 		}
 	],
 	"triggers": [
