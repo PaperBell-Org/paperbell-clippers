@@ -4,9 +4,20 @@
 
 适配最新版 [PaperBell](https://github.com/SongshGeo/Obsidian-PaperBell) 示例库，可以自动完成收藏学者、创建其机构笔记、关联该学者论文的功能。详细效果可参看 [PaperBell 文档](https://paperbell.songshgeo.com/)。
 
+## 运行前提
+
+本模板生成的笔记正文（`noteContentFormat`）依赖特定的 Obsidian 插件与库结构，**直接导入到未配置的库中会出现渲染错误或空白块**。请确保：
+
+- 已安装 [PaperBell](https://github.com/SongshGeo/Obsidian-PaperBell) 示例库，或参照其结构。
+- 已启用以下插件/功能：
+  - **Callout（`ad-flex`）** —— 用于「基本信息」区的两栏布局。
+  - **Dataview**（需开启 JavaScript 查询）—— 「最新动态」区使用 `dataviewjs` 扫描日记；其中日记路径 `00 - 每日日记/DailyNote` 为硬编码，请按你的库结构修改。
+  - **Bases** —— 「论文列表」区通过 `![[论文检索.base]]` 嵌入，需要库中存在该 base 文件。
+- 笔记默认保存路径为 `Persons/Scholars`，可在模板的 `path` 字段中调整。
+
 ## 开始使用
 
-下载 [scholar-clipper-clipper.json](./scholar-clipper-clipper.json) 文件，并将其添加到 Obsidian Web Clipper 插件的模板中。
+下载 [scholar-clipper.json](./scholar-clipper.json) 文件，并将其添加到 Obsidian Web Clipper 插件的模板中。
 
 ![导入模板](https://songshgeo-picgo-1302043007.cos.ap-beijing.myqcloud.com/uPic/CleanShot%202025-02-01%20at%2018.58.58@2x.png)
 

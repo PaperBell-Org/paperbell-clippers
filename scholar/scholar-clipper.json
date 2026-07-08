@@ -11,7 +11,7 @@
 		},
 		{
 			"name": "gender",
-			"value": "{{\\\"Gender of the current scholar, tell me 男 or 女 if Chinese; if English, tell me male or famele\\\"}}",
+			"value": "{{\\\"当前学者的性别。若为中文学者，回答 男 或 女；若为外文学者，回答 male 或 female\\\"}}",
 			"type": "text"
 		},
 		{
@@ -21,12 +21,12 @@
 		},
 		{
 			"name": "email",
-			"value": "{{\\\"Email address of the current scholar, leave it N/A if doesn't exist\\\"}}",
+			"value": "{{\\\"当前学者的电子邮箱地址；若页面中不存在则填 N/A\\\"}}",
 			"type": "text"
 		},
 		{
 			"name": "title",
-			"value": "{{\\\"Professional title of the current scholar\\\"}}",
+			"value": "{{\\\"当前学者的专业职称（如 教授 / 副教授 / 研究员 等）\\\"}}",
 			"type": "text"
 		},
 		{
@@ -36,12 +36,12 @@
 		},
 		{
 			"name": "institute",
-			"value": "{{\\\"institute of the current scholar, you should tell me the name of the university or institute, NOT department. Use the official name registered in academic databases, rather than the English translation.\\\"}}",
+			"value": "{{\\\"当前学者所属的机构：给出大学或研究所的名称，而非院系。请使用学术数据库中登记的官方名称，而非翻译名。\\\"}}",
 			"type": "text"
 		},
 		{
 			"name": "name",
-			"value": "{{\\\"author name, keep consistent with the file title in format (First name and Last name of the current scholar)\\\"}}",
+			"value": "{{\\\"学者姓名，需与文件标题格式保持一致（当前学者的名与姓）\\\"}}",
 			"type": "text"
 		},
 		{
@@ -56,7 +56,7 @@
 		},
 		{
 			"name": "photo",
-			"value": "{{\\\"Profile photo address of this person\\\"}}",
+			"value": "{{\\\"该学者头像照片的图片地址\\\"}}",
 			"type": "text"
 		}
 	],
@@ -65,7 +65,7 @@
 		"schema:@Recipe",
 		"https://scholar.google.com"
 	],
-	"noteNameFormat": "{{\"First name and Last name of the current scholar\"}}",
+	"noteNameFormat": "{{\"当前学者的名与姓\"}}",
 	"path": "Persons/Scholars",
-	"context": "If this page is on Google Scholar, please disregard the user's own Gmail address. Thank you. Please read the {{fullHtml}} and complete the required information."
+	"context": "请阅读 {{fullHtml}} 并填写所需的各项信息。注意：在 Google Scholar 等聚合页面上，页面可能同时包含当前登录用户的账号信息（如其 Gmail 地址），请只提取被展示学者本人的信息，忽略浏览者本人的账号。"
 }
