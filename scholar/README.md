@@ -14,7 +14,7 @@
   - **Dataview**（需开启 JavaScript 查询）—— 「最新动态」区使用 `dataviewjs` 扫描日记；其中日记路径 `00 - 每日日记/DailyNote` 为硬编码，请按你的库结构修改。
   - **Bases** —— 「相关论文」区通过 `![[论文检索.base]]` 嵌入，需要库中存在该 base 文件。
   - **Callout（`update` 类型）** —— 「动态日志」区用 `> [!update]` 记录学者的外部更新。
-- 笔记默认保存路径为 `Persons/Scholars`，可在模板的 `path` 字段中调整。
+- 笔记默认保存路径为 `Inputs`——本仓库所有模板都剪藏到这里，也就是 PaperBell 默认监视的 `watchFolder`，再由「按 frontmatter 移动」根据 `scholar` 标签归档到位。如需改动可调整模板的 `path` 字段，但把它挪出 `watchFolder` 会导致剪藏的笔记不再被后处理。
 - 正文含一个指向 `[[学者刷新工作流]]` 的库内链接（记录动态刷新约定），未建该笔记时链接为空链，不影响其他内容。
 
 ## Frontmatter 字段（schema）
@@ -59,10 +59,19 @@
 
 ## 支持的网站
 
-自动识别是否为学者主页，如果是则自动激活该模板。该模板在以下网站测试通过：
+以下网站的学者主页会**自动激活**本模板：
 
-- Google Scholar
-- ResearchGate
-- 北京师范大学、中山大学、马普所的学者主页
+| 类别 | 站点 |
+| --- | --- |
+| 学术档案 | Google Scholar 个人主页（多域名：`.com` / `.co.uk` / `.com.hk` 等）、ORCID、ResearchGate、Semantic Scholar、Academia.edu |
+| 文献数据库 | Scopus、Web of Science、dblp、OpenAlex、My NCBI |
+| 中文平台 | AMiner、X-MOL |
+| 其他 | Frontiers Loop、IDEAS/RePEc、ScholarGPS |
+| 机构主页 | 域名为 `.edu` / `.edu.xx` / `.ac.xx` / `.mpg.de`，且路径含 `people` / `faculty` / `staff` / `teacher` / `szdw` 等成员目录层级（如中山大学 `science.sysu.edu.cn/teacher/...`、马普所 `bgc-jena.mpg.de/en/bgi/people`） |
+| Pure 门户 | 欧洲高校常用的 Elsevier Pure 研究门户，形如 `research.rug.nl/en/persons/...`、`pure.au.dk/portal/en/persons/...` |
+
+**手动选择同样有效。** 触发规则只决定模板是否*自动*弹出；在 Web Clipper 中手动选中本模板，在任何页面上都能正常工作。部分机构主页的 URL 里不含任何可识别的成员目录层级（如北京师范大学的 `geot.bnu.edu.cn/Public/htm/news/5/<id>.html`），无法自动激活，手动选择即可。
+
+另有两点已知限制：触发匹配**大小写敏感**（`/People/` 不会命中）；非 `.edu` / `.ac.xx` 域名的高校主页（如 `uni-heidelberg.de`）也不在兜底范围内——收窄到学术域名是为了避免在普通网页上误触发。
 
 如果你发现该模板在其他网站上无法正常工作，请在 [Issue](https://github.com/SongshGeo/Obsidian-PaperBell/issues) 中反馈。
