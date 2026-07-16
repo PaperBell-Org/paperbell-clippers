@@ -15,29 +15,29 @@ jobs:
       release_created: ${{ steps.release.outputs.release_created }}
       tag_name: ${{ steps.release.outputs.tag_name }}
     steps:
-      - uses: google-github-actions/release-please-action@v3
+      - uses: googleapis/release-please-action@v4
         id: release
         with:
-          release-type: node
-          package-name: paperbell-clipper
           token: ${{ secrets.GITHUB_TOKEN }}
+          config-file: release-please-config.json
+          manifest-file: .release-please-manifest.json
 
   build-and-attach-assets:
     needs: release-please
     runs-on: ubuntu-latest
-    if: ${{ needs.release-please.outputs.release_created }}
+    # release_created is the string "false" when no release was cut, and a
+    # non-empty string is truthy here — compare explicitly.
+    if: ${{ needs.release-please.outputs.release_created == 'true' }}
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
         with:
           fetch-depth: 0
-      
+
       - name: Create source code archive
-        run: |
-          git archive --format=zip --output=source-code.zip HEAD
-          
+        run: git archive --format=zip --output=source-code.zip HEAD
+
       - name: Create templates archive
-        run: |
-          zip -r templates.zip templates/
+        run: zip -r templates.zip scholar douban -x '*.DS_Store'
 
       - name: Upload Release Assets
         env:

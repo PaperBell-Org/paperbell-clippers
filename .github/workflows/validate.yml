@@ -1,0 +1,37 @@
+name: validate
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: npm
+
+      - run: npm ci
+
+      # git ls-files, not a ** glob: a glob would walk node_modules.
+      - name: JSON syntax check
+        run: |
+          for file in $(git ls-files '*.json'); do
+            jq empty "$file" || { echo "::error file=$file::invalid JSON"; exit 1; }
+          done
+
+      - name: Validate templates against schema
+        run: npm run validate:schema
+
+      - name: Compile-check regex triggers (V8 semantics)
+        run: npm run validate:triggers

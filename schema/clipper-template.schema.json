@@ -1,0 +1,66 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/PaperBell-Org/paperbell-clippers/schema/clipper-template.schema.json",
+  "title": "PaperBell Obsidian Web Clipper template",
+  "description": "Shape of a template JSON in this repo. Stricter than upstream Obsidian Web Clipper on purpose: this repo pins schemaVersion and requires every template to clip into Inputs, the folder PaperBell watches.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schemaVersion",
+    "name",
+    "behavior",
+    "noteContentFormat",
+    "properties",
+    "triggers",
+    "noteNameFormat",
+    "path",
+    "context"
+  ],
+  "properties": {
+    "schemaVersion": {
+      "const": "0.1.0",
+      "description": "Web Clipper template format version. Bumping this is a deliberate, reviewed change."
+    },
+    "name": { "type": "string", "minLength": 1 },
+    "behavior": {
+      "enum": [
+        "create",
+        "append-specific",
+        "append-daily",
+        "prepend-specific",
+        "prepend-daily",
+        "overwrite"
+      ]
+    },
+    "noteContentFormat": { "type": "string", "minLength": 1 },
+    "noteNameFormat": { "type": "string", "minLength": 1 },
+    "path": {
+      "const": "Inputs",
+      "description": "Repo policy: every PaperBell clipper lands in Inputs, which PaperBell watches and files by frontmatter."
+    },
+    "context": { "type": "string" },
+    "vault": { "type": "string" },
+    "triggers": {
+      "type": "array",
+      "minItems": 1,
+      "uniqueItems": true,
+      "items": { "type": "string", "minLength": 1 }
+    },
+    "properties": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["name", "value", "type"],
+        "properties": {
+          "name": { "type": "string", "minLength": 1 },
+          "value": { "type": "string" },
+          "type": {
+            "enum": ["text", "multitext", "number", "checkbox", "date", "datetime"]
+          }
+        }
+      }
+    }
+  }
+}

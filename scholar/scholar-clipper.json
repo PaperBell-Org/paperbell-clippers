@@ -1,0 +1,115 @@
+{
+	"schemaVersion": "0.1.0",
+	"name": "Scholar clipper",
+	"behavior": "create",
+	"noteContentFormat": "## 基本信息\n\n````ad-flex\n\n<div>\n\n<br>\n\n🧑‍🔬`=(this.name)`\n📮`=(this.email)`\n🏫`=link(this.institute)`\n🔗`=(this.website)`\n\n</div>\n\n\n<div>\n\n\n`=(\"![](\" + this.photo + \")\")`\n\n\n</div>\n\n````\n\n## 研究兴趣\n\n> 研究兴趣见 frontmatter 的 `keywords`（可被 Base 筛选；概念端会按 keyword 反查到本学者）。下方可补充自由描述。\n\n`=this.keywords`\n\n-\n\n## 相关论文\n\n![[论文检索.base]]\n\n## 动态日志\n\n> 记录学者的**外部**更新（新论文、职位变动等）。职位变动时把新机构追加到 frontmatter `institute` 数组开头。\n> 由 [[学者刷新工作流]] 定期补充，或手动添加。\n\n> [!update] {{date}}\n> - 建档\n\n## 最新动态\n\n```dataviewjs\n\nlet folderChoicePath = \"00 - 每日日记/DailyNote\"\nconst files = app.vault.getMarkdownFiles().filter(file => file.path.includes(folderChoicePath))\nlet names = dv.current().aliases ? dv.current().aliases : [];\nnames.push(dv.current().name)\n\n\nlet arr = files.map(async(file) => {\n    const content = await app.vault.cachedRead(file)\n    let lines = await content.split(\"\\\\n\").filter(line => names.some(name => line.includes(name)))\n    return [\"[[\"+file.name.split(\".\")[0]+\"]]\", lines]\n})\n\nPromise.all(arr).then(values => {\n    const beautify = values.map(value => {\n        const temp = value[1].map(line => { return line })\n        return [value[0],temp]\n    })\n    const exists = beautify.filter(value => value[1][0] && value[0] != \"[[未命名 10]]\") .sort(value => value[0],'desc')\n    dv.table([\"日期\", \"动态\"], exists)\n})\n\n```\n",
+	"properties": [
+		{
+			"name": "name",
+			"value": "{{\\\"学者姓名，需与文件标题格式保持一致（当前学者的名与姓）\\\"}}",
+			"type": "text"
+		},
+		{
+			"name": "aliases",
+			"value": "",
+			"type": "multitext"
+		},
+		{
+			"name": "gender",
+			"value": "{{\\\"当前学者的性别。若为中文学者，回答 男 或 女；若为外文学者，回答 male 或 female\\\"}}",
+			"type": "text"
+		},
+		{
+			"name": "birthday",
+			"value": "",
+			"type": "text"
+		},
+		{
+			"name": "email",
+			"value": "{{\\\"当前学者的电子邮箱地址；若页面中不存在则填 N/A\\\"}}",
+			"type": "multitext"
+		},
+		{
+			"name": "title",
+			"value": "{{\\\"当前学者的专业职称（如 教授 / 副教授 / 研究员 等）\\\"}}",
+			"type": "multitext"
+		},
+		{
+			"name": "website",
+			"value": "{{url}}",
+			"type": "text"
+		},
+		{
+			"name": "photo",
+			"value": "{{\\\"该学者头像照片的图片地址\\\"}}",
+			"type": "text"
+		},
+		{
+			"name": "tags",
+			"value": "scholar, clippings",
+			"type": "multitext"
+		},
+		{
+			"name": "institute",
+			"value": "{{\\\"当前学者所属的机构：给出大学或研究所的名称，而非院系。请使用学术数据库中登记的官方名称，而非翻译名。若有多个机构，用英文逗号分隔。\\\"}}",
+			"type": "multitext"
+		},
+		{
+			"name": "following_date",
+			"value": "{{date}}",
+			"type": "text"
+		},
+		{
+			"name": "keywords",
+			"value": "{{\\\"该学者的研究兴趣关键词，返回 3-6 个宽泛标签，用英文逗号分隔（如 flood risk, socio-hydrology, water management）\\\"}}",
+			"type": "multitext"
+		},
+		{
+			"name": "country",
+			"value": "{{\\\"该学者所在机构所属的国家或地区（英文，如 China, United States, Sweden）\\\"}}",
+			"type": "text"
+		},
+		{
+			"name": "roles",
+			"value": "",
+			"type": "multitext"
+		},
+		{
+			"name": "updated",
+			"value": "{{date}}",
+			"type": "text"
+		},
+		{
+			"name": "last_checked",
+			"value": "{{date}}",
+			"type": "text"
+		},
+		{
+			"name": "link_status",
+			"value": "",
+			"type": "multitext"
+		}
+	],
+	"triggers": [
+		"/^https:\\/\\/scholar\\.google\\.[a-z]{2,3}(?:\\.[a-z]{2})?\\/citations\\?(?:[^#]*&)?user=/",
+		"/^https:\\/\\/orcid\\.org\\/\\d{4}-\\d{4}-\\d{4}-\\d{3}[\\dX]/",
+		"/^https:\\/\\/www\\.researchgate\\.net\\/profile\\//",
+		"/^https:\\/\\/www\\.semanticscholar\\.org\\/author\\//",
+		"/^https:\\/\\/www\\.scopus\\.com\\/authid\\/detail\\.uri/",
+		"/^https:\\/\\/www\\.webofscience\\.com\\/wos\\/author\\/record\\//",
+		"/^https:\\/\\/dblp\\.(?:org|uni-trier\\.de)\\/pid\\//",
+		"/^https:\\/\\/openalex\\.org\\/authors\\/[aA]\\d+/",
+		"/^https:\\/\\/(?:www|cn)\\.aminer\\.(?:cn|org)\\/profile\\//",
+		"/^https:\\/\\/www\\.x-mol\\.com\\/university\\/faculty\\/\\d+/",
+		"/^https:\\/\\/loop\\.frontiersin\\.org\\/people\\/\\d+/",
+		"/^https:\\/\\/ideas\\.repec\\.org\\/f\\//",
+		"/^https:\\/\\/scholargps\\.com\\/scholars\\/\\d+/",
+		"/^https:\\/\\/www\\.ncbi\\.nlm\\.nih\\.gov\\/(?:sites\\/)?myncbi\\/[^\\/]+\\/bibliography\\//",
+		"/^https:\\/\\/(?!www\\.)[a-z0-9-]+\\.academia\\.edu\\/[^\\/?#]+/",
+		"/^https:\\/\\/(?:research|researchportal|pure)[a-z0-9.-]*\\.[a-z.]+\\/(?:portal\\/)?[a-z]{2}\\/persons\\//",
+		"/^https?:\\/\\/[^\\/?#]+\\.(?:edu(?:\\.[a-z]{2})?|ac\\.[a-z]{2}|mpg\\.de)\\/(?:[^?#]*\\/)?(?:people|person|persons|profile|profiles|faculty|staff|teacher|teachers|members?|szdw|jsdw|rcdw)(?:[\\/?]|\\.html?|$)/"
+	],
+	"noteNameFormat": "{{\"当前学者的名与姓\"}}",
+	"path": "Inputs",
+	"context": "请阅读 {{fullHtml}} 并填写所需的各项信息。注意：在 Google Scholar 等聚合页面上，页面可能同时包含当前登录用户的账号信息（如其 Gmail 地址），请只提取被展示学者本人的信息，忽略浏览者本人的账号。"
+}
