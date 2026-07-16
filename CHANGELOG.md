@@ -1,5 +1,19 @@
 # Changelog
 
+## [1.2.0](https://github.com/PaperBell-Org/paperbell-clippers/compare/v1.1.0...v1.2.0) (2026-07-16)
+
+
+### Features
+
+* :sparkles: Align scholar template with updated vault schema ([01bf692](https://github.com/PaperBell-Org/paperbell-clippers/commit/01bf692926779b0d089d69e7fd9ccffe56ef4d86))
+* retarget scholar triggers at verified scholar profile sites ([14a4dd2](https://github.com/PaperBell-Org/paperbell-clippers/commit/14a4dd279d1d6e3f91b2212371ddf6a69115e97d))
+* 统一剪藏落点到 Inputs、重写学者触发规则，并为模板加上 CI 校验 ([4c4b86c](https://github.com/PaperBell-Org/paperbell-clippers/commit/4c4b86c1e7904d0badd3bd81df7ccbbed36e1ff0))
+
+
+### Bug Fixes
+
+* **scholar:** clip into the Inputs folder so post-processing can fire ([0742e09](https://github.com/PaperBell-Org/paperbell-clippers/commit/0742e093736ea594003ae5b55a1ebff0bba90a33))
+
 ## [1.1.0](https://github.com/PaperBell-Org/paperbell-clippers/compare/v1.0.1...v1.1.0) (2025-12-11)
 
 
