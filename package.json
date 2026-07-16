@@ -1,0 +1,14 @@
+{
+  "name": "paperbell-clipper",
+  "version": "1.1.0",
+  "private": true,
+  "description": "Obsidian Web Clipper templates for PaperBell",
+  "scripts": {
+    "validate": "npm run validate:schema && npm run validate:triggers",
+    "validate:schema": "ajv validate --spec=draft2020 -s schema/clipper-template.schema.json -d \"scholar/*.json\" -d \"douban/*.json\"",
+    "validate:triggers": "node scripts/check-triggers.mjs scholar/scholar-clipper.json douban/douban-book-clipper.json douban/douban-movie-clipper.json"
+  },
+  "devDependencies": {
+    "ajv-cli": "^5.0.0"
+  }
+}
