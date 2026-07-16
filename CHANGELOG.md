@@ -1,5 +1,13 @@
 # Changelog
 
+## [1.2.1](https://github.com/PaperBell-Org/paperbell-clippers/compare/v1.2.0...v1.2.1) (2026-07-16)
+
+
+### Bug Fixes
+
+* update paths in templates and documentation to reflect new folder structure ([e1086cd](https://github.com/PaperBell-Org/paperbell-clippers/commit/e1086cdb4c3958c5fe76affc5721c3266963e807))
+* update paths in templates and documentation to reflect new folder structure ([11f4682](https://github.com/PaperBell-Org/paperbell-clippers/commit/11f468278b5f46743061ee88cfb3008ebd6d9c6a))
+
 ## [1.2.0](https://github.com/PaperBell-Org/paperbell-clippers/compare/v1.1.0...v1.2.0) (2026-07-16)
 
 
