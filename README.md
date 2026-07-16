@@ -11,7 +11,7 @@ To install a template, see the official [Obsidian Web Clipper documentation](htt
 - [Scholar](scholar/README.md) — clip a scholar's profile and import it into PaperBell.
 - [Douban](douban/README.md) — clip a Douban book or movie entry into PaperBell.
 
-Every template clips into `Inputs`, the folder PaperBell watches, and is filed from there by frontmatter.
+Every template clips into `20 - Inputs`, the folder PaperBell watches, and is filed from there by frontmatter.
 
 ## Contribution
 

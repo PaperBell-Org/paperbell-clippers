@@ -2,7 +2,7 @@
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "$id": "https://github.com/PaperBell-Org/paperbell-clippers/schema/clipper-template.schema.json",
   "title": "PaperBell Obsidian Web Clipper template",
-  "description": "Shape of a template JSON in this repo. Stricter than upstream Obsidian Web Clipper on purpose: this repo pins schemaVersion and requires every template to clip into Inputs, the folder PaperBell watches.",
+  "description": "Shape of a template JSON in this repo. Stricter than upstream Obsidian Web Clipper on purpose: this repo pins schemaVersion and requires every template to clip into 20 - Inputs, the folder PaperBell watches.",
   "type": "object",
   "additionalProperties": false,
   "required": [
@@ -35,8 +35,8 @@
     "noteContentFormat": { "type": "string", "minLength": 1 },
     "noteNameFormat": { "type": "string", "minLength": 1 },
     "path": {
-      "const": "Inputs",
-      "description": "Repo policy: every PaperBell clipper lands in Inputs, which PaperBell watches and files by frontmatter."
+      "const": "20 - Inputs",
+      "description": "Repo policy: every PaperBell clipper lands in 20 - Inputs, which PaperBell watches and files by frontmatter."
     },
     "context": { "type": "string" },
     "vault": { "type": "string" },

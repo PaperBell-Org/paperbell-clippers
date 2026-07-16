@@ -99,6 +99,6 @@
 		"https://movie.douban.com/subject/"
 	],
 	"noteNameFormat": "{{meta:property:og:title}}",
-	"path": "Inputs",
+	"path": "20 - Inputs",
 	"context": ""
 }

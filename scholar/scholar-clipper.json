@@ -110,6 +110,6 @@
 		"/^https?:\\/\\/[^\\/?#]+\\.(?:edu(?:\\.[a-z]{2})?|ac\\.[a-z]{2}|mpg\\.de)\\/(?:[^?#]*\\/)?(?:people|person|persons|profile|profiles|faculty|staff|teacher|teachers|members?|szdw|jsdw|rcdw)(?:[\\/?]|\\.html?|$)/"
 	],
 	"noteNameFormat": "{{\"当前学者的名与姓\"}}",
-	"path": "Inputs",
+	"path": "20 - Inputs",
 	"context": "请阅读 {{fullHtml}} 并填写所需的各项信息。注意：在 Google Scholar 等聚合页面上，页面可能同时包含当前登录用户的账号信息（如其 Gmail 地址），请只提取被展示学者本人的信息，忽略浏览者本人的账号。"
 }

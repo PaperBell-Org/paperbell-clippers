@@ -11,7 +11,7 @@
 
 比学者模板轻得多，正文为空，只写 frontmatter，所以对插件几乎没有依赖。请确保：
 
-- 笔记默认保存路径为 `Inputs`——本仓库所有模板都剪藏到这里，也就是 PaperBell 默认监视的 `watchFolder`，再由「按 frontmatter 移动」根据 `input_type` / `tags` 归档到位。如需改动可调整模板的 `path` 字段，但把它挪出 `watchFolder` 会导致剪藏的笔记不再被后处理。
+- 笔记默认保存路径为 `20 - Inputs`——本仓库所有模板都剪藏到这里，也就是 PaperBell 默认监视的 `watchFolder`，再由「按 frontmatter 移动」根据 `input_type` / `tags` 归档到位。如需改动可调整模板的 `path` 字段，但把它挪出 `watchFolder` 会导致剪藏的笔记不再被后处理。
 - `banner` / `banner_icon` 字段供支持横幅的主题或插件（如 Banners）使用；没装也不影响，只是多两个用不上的 frontmatter 字段。
 
 ## Frontmatter 字段（schema）
