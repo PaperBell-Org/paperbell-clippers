@@ -1,0 +1,104 @@
+{
+	"schemaVersion": "0.1.0",
+	"name": "豆瓣读书",
+	"behavior": "create",
+	"noteContentFormat": "## 内容简介\n\n![bookcover|inlR|260]({{meta:property:og:image|replace:\"/subject/s/\":\"/subject/l/\"}})\n\n{{meta:property:og:description}}\n\n## Excerpts\n\n## Comments\n",
+	"properties": [
+		{
+			"name": "name",
+			"value": "{{meta:property:og:title}}",
+			"type": "text"
+		},
+		{
+			"name": "title",
+			"value": "{{meta:property:og:title}}",
+			"type": "text"
+		},
+		{
+			"name": "input_type",
+			"value": "book",
+			"type": "text"
+		},
+		{
+			"name": "cover",
+			"value": "{{meta:property:og:image|replace:\"/subject/s/\":\"/subject/l/\"}}",
+			"type": "text"
+		},
+		{
+			"name": "tags",
+			"value": "reading, clippings",
+			"type": "multitext"
+		},
+		{
+			"name": "keywords",
+			"value": "",
+			"type": "multitext"
+		},
+		{
+			"name": "source",
+			"value": "{{url}}",
+			"type": "text"
+		},
+		{
+			"name": "douban_url",
+			"value": "{{url}}",
+			"type": "text"
+		},
+		{
+			"name": "author",
+			"value": "{{schema:@Book:author[*].name}}",
+			"type": "multitext"
+		},
+		{
+			"name": "isbn",
+			"value": "{{schema:@Book:isbn}}",
+			"type": "text"
+		},
+		{
+			"name": "rating",
+			"value": "{{schema:@Book:aggregateRating.ratingValue}}",
+			"type": "text"
+		},
+		{
+			"name": "publish",
+			"value": "{{schema:@Book:publisher}}",
+			"type": "text"
+		},
+		{
+			"name": "pagecount",
+			"value": "{{schema:@Book:numberOfPages}}",
+			"type": "text"
+		},
+		{
+			"name": "banner",
+			"value": "{{meta:property:og:image|replace:\"/subject/s/\":\"/subject/l/\"}}",
+			"type": "text"
+		},
+		{
+			"name": "banner_icon",
+			"value": "📚",
+			"type": "text"
+		},
+		{
+			"name": "date",
+			"value": "{{date}}",
+			"type": "text"
+		},
+		{
+			"name": "captured",
+			"value": "{{date}}",
+			"type": "text"
+		},
+		{
+			"name": "star",
+			"value": "",
+			"type": "text"
+		}
+	],
+	"triggers": [
+		"https://book.douban.com/subject/"
+	],
+	"noteNameFormat": "{{meta:property:og:title}}",
+	"path": "Inputs",
+	"context": ""
+}
