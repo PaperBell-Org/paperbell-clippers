@@ -91,9 +91,23 @@
 		}
 	],
 	"triggers": [
-		"/\\/(?:person|people|profile|faculty|staff|edu|research|scholar|research-profile)\\//",
-		"schema:@Recipe",
-		"https://scholar.google.com"
+		"/^https:\\/\\/scholar\\.google\\.[a-z]{2,3}(?:\\.[a-z]{2})?\\/citations\\?(?:[^#]*&)?user=/",
+		"/^https:\\/\\/orcid\\.org\\/\\d{4}-\\d{4}-\\d{4}-\\d{3}[\\dX]/",
+		"/^https:\\/\\/www\\.researchgate\\.net\\/profile\\//",
+		"/^https:\\/\\/www\\.semanticscholar\\.org\\/author\\//",
+		"/^https:\\/\\/www\\.scopus\\.com\\/authid\\/detail\\.uri/",
+		"/^https:\\/\\/www\\.webofscience\\.com\\/wos\\/author\\/record\\//",
+		"/^https:\\/\\/dblp\\.(?:org|uni-trier\\.de)\\/pid\\//",
+		"/^https:\\/\\/openalex\\.org\\/authors\\/[aA]\\d+/",
+		"/^https:\\/\\/(?:www|cn)\\.aminer\\.(?:cn|org)\\/profile\\//",
+		"/^https:\\/\\/www\\.x-mol\\.com\\/university\\/faculty\\/\\d+/",
+		"/^https:\\/\\/loop\\.frontiersin\\.org\\/people\\/\\d+/",
+		"/^https:\\/\\/ideas\\.repec\\.org\\/f\\//",
+		"/^https:\\/\\/scholargps\\.com\\/scholars\\/\\d+/",
+		"/^https:\\/\\/www\\.ncbi\\.nlm\\.nih\\.gov\\/(?:sites\\/)?myncbi\\/[^\\/]+\\/bibliography\\//",
+		"/^https:\\/\\/(?!www\\.)[a-z0-9-]+\\.academia\\.edu\\/[^\\/?#]+/",
+		"/^https:\\/\\/(?:research|researchportal|pure)[a-z0-9.-]*\\.[a-z.]+\\/(?:portal\\/)?[a-z]{2}\\/persons\\//",
+		"/^https?:\\/\\/[^\\/?#]+\\.(?:edu(?:\\.[a-z]{2})?|ac\\.[a-z]{2}|mpg\\.de)\\/(?:[^?#]*\\/)?(?:people|person|persons|profile|profiles|faculty|staff|teacher|teachers|members?|szdw|jsdw|rcdw)(?:[\\/?]|\\.html?|$)/"
 	],
 	"noteNameFormat": "{{\"当前学者的名与姓\"}}",
 	"path": "Inputs",
