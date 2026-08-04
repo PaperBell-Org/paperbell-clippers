@@ -1,5 +1,15 @@
 # Changelog
 
+## [1.2.1](https://github.com/PaperBell-Org/paperbell-clippers/compare/v1.2.0...v1.2.1) (2026-08-04)
+
+
+### Bug Fixes
+
+* **scholar:** clip straight into 30 - Metadata/Scholars ([b94e4b5](https://github.com/PaperBell-Org/paperbell-clippers/commit/b94e4b5f6fe443d55a39e2f758df58abc359e381))
+* **scholar:** clip straight into 30 - Metadata/Scholars ([7e5e480](https://github.com/PaperBell-Org/paperbell-clippers/commit/7e5e480c8021a3be2aa9ab56bb1f2f95773d0333))
+* update paths in templates and documentation to reflect new folder structure ([e1086cd](https://github.com/PaperBell-Org/paperbell-clippers/commit/e1086cdb4c3958c5fe76affc5721c3266963e807))
+* update paths in templates and documentation to reflect new folder structure ([11f4682](https://github.com/PaperBell-Org/paperbell-clippers/commit/11f468278b5f46743061ee88cfb3008ebd6d9c6a))
+
 ## [1.2.0](https://github.com/PaperBell-Org/paperbell-clippers/compare/v1.1.0...v1.2.0) (2026-07-16)
 
 

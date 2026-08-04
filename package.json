@@ -1,6 +1,6 @@
 {
   "name": "paperbell-clipper",
-  "version": "1.2.0",
+  "version": "1.2.1",
   "private": true,
   "description": "Obsidian Web Clipper templates for PaperBell",
   "scripts": {
