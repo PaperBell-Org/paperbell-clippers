@@ -11,7 +11,7 @@
 - [爬取并导入学者信息到 PaperBell](scholar/README.md)
 - [剪藏豆瓣读书 / 电影条目到 PaperBell](douban/README.md)
 
-所有模板都剪藏到 `20 - Inputs`——PaperBell 监视的文件夹，再由其按 frontmatter 归档。
+多数模板剪藏到 `20 - Inputs`——PaperBell 监视的文件夹，再由其按 frontmatter 归档。学者模板是例外：它直接写入 `30 - Metadata/Scholars`，因为交给 frontmatter 归档只会把它放进 `20 - Inputs/Clippings`。
 
 ## 贡献指南
 

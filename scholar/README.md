@@ -14,7 +14,7 @@
   - **Dataview**（需开启 JavaScript 查询）—— 「最新动态」区使用 `dataviewjs` 扫描日记；其中日记路径 `00 - 每日日记/DailyNote` 为硬编码，请按你的库结构修改。
   - **Bases** —— 「相关论文」区通过 `![[论文检索.base]]` 嵌入，需要库中存在该 base 文件。
   - **Callout（`update` 类型）** —— 「动态日志」区用 `> [!update]` 记录学者的外部更新。
-- 笔记默认保存路径为 `20 - Inputs`——本仓库所有模板都剪藏到这里，也就是 PaperBell 默认监视的 `watchFolder`，再由「按 frontmatter 移动」根据 `scholar` 标签归档到位。如需改动可调整模板的 `path` 字段，但把它挪出 `watchFolder` 会导致剪藏的笔记不再被后处理。
+- 笔记默认保存路径为 `30 - Metadata/Scholars`——学者笔记的最终归属地，本模板直接写入这里，**不经过** `20 - Inputs`。原因是交给 Inputs Bell 的「按 frontmatter 移动」处理，学者笔记会被归档到 `20 - Inputs/Clippings` 而非 `30 - Metadata/Scholars`。如你的库结构不同，可调整模板的 `path` 字段。
 - 正文含一个指向 `[[学者刷新工作流]]` 的库内链接（记录动态刷新约定），未建该笔记时链接为空链，不影响其他内容。
 
 ## Frontmatter 字段（schema）
