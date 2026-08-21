@@ -30,7 +30,7 @@
 | `email` | list | LLM | 邮箱 |
 | `title` | list | LLM | 职称 |
 | `website` | text | `{{url}}` | 主页链接 |
-| `photo` | text | LLM | 头像图片地址 |
+| `photo` | text | LLM | 头像图片地址；也可以是库内路径，见下方「头像怎么渲染」 |
 | `tags` | list | 固定 | `scholar, clippings` |
 | `institute` | list | LLM | 机构数组，**当前机构 = `institute[0]`**；职位变动时把新机构追加到数组开头 |
 | `following_date` | text | `{{date}}` | 建档日期 |
@@ -42,6 +42,14 @@
 | `link_status` | list | 工作流 | 链接体检结果，健康时留空；失效时记 `<字段> <错误码>`（如 `website 404`） |
 
 `concepts`（指向 `Cards/Concepts` 的研究概念链接）不在 clip 时生成，改由刷新工作流对照受控词表兜底补全。
+
+### 头像怎么渲染
+
+正文里用一行 `choice(this.photo, …)` 内联表达式把 `photo` 拼成 `![](…)`。豆瓣模板的封面在 clip 时就用 Web Clipper 的 `replace` 过滤器定死了，这里不行——`photo` 的值在 clip 之后还会被改写，所以只能在渲染时处理。表达式给了三条保证，每条都是踩过的坑：
+
+- **空值渲染成空白**，而不是字面量 `![](null)`。
+- **`string()` 收口**：`photo` 可能被填成 wikilink 或数字，Dataview 的 `replace` 只认字符串，直接喂过去会让整行变成报错。
+- **空格与圆括号转成 `%20` / `%28` / `%29`**：Markdown 的链接目标放不下裸空格，路径一旦带空格，Obsidian 就把整行当纯文本印出来。Inputs Bell 的「本地化远程图片」会把 `photo` 换成库内路径，而常见的资源文件夹就叫 `20 - Inputs/_assets`，名字里带空格。Inputs Bell 写回时已经编码过，这里再编一次是为了兜住它没经手的值——手填的路径、旧版本留下的笔记；`%` 不参与编码，所以重复编码是安全的。
 
 ## 开始使用
 
