@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.2.2](https://github.com/PaperBell-Org/paperbell-clippers/compare/v1.2.1...v1.2.2) (2026-08-21)
+
+
+### Bug Fixes
+
+* **scholar:** render the photo through a link a path with spaces survives ([bf633a0](https://github.com/PaperBell-Org/paperbell-clippers/commit/bf633a0eaae72da0244986c556ae1ed6f174e90d))
+
 ## [1.2.1](https://github.com/PaperBell-Org/paperbell-clippers/compare/v1.2.0...v1.2.1) (2026-08-04)
 
 
