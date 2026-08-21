@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.2.2](https://github.com/PaperBell-Org/paperbell-clippers/compare/v1.2.1...v1.2.2) (2026-08-21)
+
+
+### Bug Fixes
+
+* **scholar:** the photo no longer vanishes when the assets folder name contains spaces. The body renders a literal markdown image now — the same shape the douban templates use — instead of a Dataview expression, so the image link never has to hold a path with spaces ([fb69573](https://github.com/PaperBell-Org/paperbell-clippers/commit/fb69573cdab7edbb1c2b12ea91b74aa39f15ddc7))
+
 ## [1.2.1](https://github.com/PaperBell-Org/paperbell-clippers/compare/v1.2.0...v1.2.1) (2026-08-04)
 
 
