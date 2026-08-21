@@ -35,3 +35,6 @@ jobs:
 
       - name: Compile-check regex triggers (V8 semantics)
         run: npm run validate:triggers
+
+      - name: Check body prompts match their properties
+        run: npm run validate:prompts

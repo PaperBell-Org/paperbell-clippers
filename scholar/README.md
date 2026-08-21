@@ -30,7 +30,7 @@
 | `email` | list | LLM | 邮箱 |
 | `title` | list | LLM | 职称 |
 | `website` | text | `{{url}}` | 主页链接 |
-| `photo` | text | LLM | 头像图片地址 |
+| `photo` | text | LLM | 头像图片地址；正文也引用同一个值，见下方「头像怎么渲染」 |
 | `tags` | list | 固定 | `scholar, clippings` |
 | `institute` | list | LLM | 机构数组，**当前机构 = `institute[0]`**；职位变动时把新机构追加到数组开头 |
 | `following_date` | text | `{{date}}` | 建档日期 |
@@ -42,6 +42,14 @@
 | `link_status` | list | 工作流 | 链接体检结果，健康时留空；失效时记 `<字段> <错误码>`（如 `website 404`） |
 
 `concepts`（指向 `Cards/Concepts` 的研究概念链接）不在 clip 时生成，改由刷新工作流对照受控词表兜底补全。
+
+### 头像怎么渲染
+
+正文里放的是一张**字面 markdown 图片**（`![photo|inlR|260](…)`），和豆瓣模板的封面同一个写法，宽度也沿用它们的 260。括号里的图片地址不是另写的，而是与 `photo` 属性**逐字节相同的同一个 prompt**：Web Clipper 以 prompt 原文为键去重收集（`obsidian-clipper/src/utils/interpreter.ts` 的 `collectPromptVariables`，正文与属性扫进同一个 Map），所以只问一次模型，正文和 frontmatter 拿到同一个答案。两处一旦不一致就变成两次独立提问、两个可能矛盾的答案，而且表面上都填上了、不会报错——`npm run validate` 里的 `check-prompt-sync.mjs` 就是为此设的硬失败。
+
+这里刻意**不用 Dataview 内联表达式**。一来 Dataview 正在退场（见 PaperBell 文档「修改笔记间关联逻辑」，绝大多数关联已由 Bases 承担）；二来字面图片能被 Inputs Bell 的「本地化远程图片」接手——它把正文里的 `![](远程链接)` 改写成 `![[文件名]]`，wikilink 内嵌天生允许空格，于是 `20 - Inputs/_assets` 这种带空格的资源文件夹根本不构成问题。frontmatter 里的 `photo` 仍会被改写成库内路径（空格转 `%20`），那是给 Bases 等其它消费者用的。
+
+两个已知边界，与豆瓣模板一致：学者没有照片时正文会留下一个空的图片语法；图片地址若不以 `.jpg`/`.png` 这类扩展名结尾（部分高校主页的头像就是如此），本地化不会触发，正文保留外链。
 
 ## 开始使用
 
